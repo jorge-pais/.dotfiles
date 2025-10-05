@@ -100,7 +100,7 @@ fi
 
 # === create symlink to tmux.conf ===
 create_symlink "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
-create_symlink "$DOTFILES_DIR/tmux/tmux.conf.local" "$HOME/.config/tmux/tmux.conf"
+create_symlink "$DOTFILES_DIR/tmux/tmux.conf.local" "$HOME/.config/tmux/tmux.conf.local"
 
 echo ""
 echo "Setup complete!"
