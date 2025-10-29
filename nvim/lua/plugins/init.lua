@@ -23,6 +23,10 @@ return {
     suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
     -- log_level = 'debug',
   }
+},
+{
+    "OXY2DEV/markview.nvim",
+    lazy = false,
 }
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",

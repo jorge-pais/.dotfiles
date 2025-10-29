@@ -39,6 +39,8 @@ end)
 -- load exrc for loading project specific configs via .nvim.lua
 vim.o.secure = false
 vim.o.exrc= true
+vim.o.number = true
+vim.o.relativenumber = true
 
 vim.cmd([[
   set number 

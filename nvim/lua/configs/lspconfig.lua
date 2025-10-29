@@ -1,23 +1,25 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-
 -- EXAMPLE
-local servers = { "html", "cssls" }
+-- local servers = { "html", "cssls", "clangd", "lemminx", "bashls", "docker-language-server" }
+local servers = { "html", "cssls", "clangd", "lemminx" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps with default config
+vim.lsp.enable(servers)
+
+-- lsps with default config using the new API
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  -- lsp_config.server(lsp, {
+  vim.lsp.config[lsp] = {
     on_attach = nvlsp.on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
   }
 end
 
--- clangd 
-lspconfig.clangd.setup{
+-- clangd configuration using new API
+vim.lsp.config["clangd"] = {
   cmd = {
     "clangd",
     "--background-index",
@@ -27,11 +29,7 @@ lspconfig.clangd.setup{
     "--query-driver=/usr/bin/clang++"
   },
   filetypes = { "c", "cpp", "objc", "objcpp" },
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
 }
-
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
