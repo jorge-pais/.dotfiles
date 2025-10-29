@@ -93,10 +93,10 @@ if [ -z "${NVIM_SKIP}" ]; then
 fi
 
 # === create symlink to ranger folder ===
-# create_symlink "$DOTFILES_DIR/ranger" "$HOME/.config/ranger"
+create_symlink "$DOTFILES_DIR/ranger" "$HOME/.config/ranger"
 
 # === create symlink to qalc.cfg ===
-# create_symlink "$DOTFILES_DIR/qalc.cfg" "$HOME/.config/qalc.cfg"
+create_symlink "$DOTFILES_DIR/qalc.cfg" "$HOME/.config/qalc.cfg"
 
 # === create symlink to tmux.conf ===
 create_symlink "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"

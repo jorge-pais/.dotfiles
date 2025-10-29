@@ -48,7 +48,7 @@ install_pacman() {
         ripgrep \
         fd \
         ranger \
-        qalc \
+        libqalculate \
         docker \
         docker-compose
 }
