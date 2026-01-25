@@ -4,9 +4,6 @@ export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/loca
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
 
@@ -60,13 +57,6 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR=$(which vim)
-else
-    export EDITOR=$(which nvim)
-fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
@@ -88,6 +78,14 @@ plugins=(... colored-man-pages)
 # ctrl backspace to delete previous word (ctrl+w does the same)
 bindkey '^H' backward-kill-word
 
+# ========== Environment config ========== 
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR=$(which vim)
+else
+    export EDITOR=$(which nvim)
+fi
+
 # ========== Custom aliases ============
 # docker
 alias dcbuild='docker compose build'
@@ -100,5 +98,7 @@ docksh() { docker exec -it $1 /bin/bash; }
 alias gitroot='cd $(git rev-parse --show-toplevel)'
 
 # zoxide
-eval "$(zoxide init zsh)"
+if [[ $(which zoxide) ]]; then
+    eval "$(zoxide init zsh)"
+fi
 
