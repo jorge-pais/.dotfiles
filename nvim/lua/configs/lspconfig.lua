@@ -3,7 +3,7 @@ require("nvchad.configs.lspconfig").defaults()
 
 -- EXAMPLE
 -- local servers = { "html", "cssls", "clangd", "lemminx", "bashls", "docker-language-server" }
-local servers = { "html", "cssls", "clangd", "lemminx" }
+local servers = { "html", "cssls", "clangd", "lemminx", "zuban" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 vim.lsp.enable(servers)
@@ -32,4 +32,20 @@ vim.lsp.config["clangd"] = {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
+}
+
+vim.lsp.config["zuban"] = {
+    cmd = {
+        "zuban",
+        "server"
+    },
+    filetypes = { 'python' },
+    root_markers = {
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        '.git',
+    }
 }
