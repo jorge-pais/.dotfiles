@@ -29,6 +29,7 @@ install_dnf() {
         fd-find \
         ranger \
         qalc \
+        zoxide
 
         # https://docs.docker.com/engine/install/fedora/
         # docker \ 
@@ -49,8 +50,39 @@ install_pacman() {
         fd \
         ranger \
         libqalculate \
+        zoxide \
         docker \
         docker-compose
+}
+
+install_brew() {
+    echo "Installing packages using Homebrew (macOS)"
+    # ensure_homebrew # check for homebrew, not yet available
+
+    brew update
+
+    # CLI tools
+    brew install \
+        zsh \
+        tmux \
+        neovim \
+        python \
+        node \
+        fzf \
+        ripgrep \
+        fd \
+        ranger \
+        libqalculate \
+        zoxide
+
+    # Optional: enable fzf keybindings/completion (safe if it already ran)
+    if [ -x "$(brew --prefix)/opt/fzf/install" ]; then
+        "$(brew --prefix)/opt/fzf/install" --key-bindings --completion --no-update-rc || true
+    fi
+
+    # Docker Desktop is typically installed as a cask on macOS
+    # Uncomment if you want it:
+    # brew install --cask docker
 }
 
 case "$DISTRO" in
@@ -60,8 +92,12 @@ case "$DISTRO" in
     arch|manjaro)
         install_pacman
         ;;
+    macos)
+        install_brew
+        ;;
     *)
         echo "Unsupported distribution: $DISTRO"
         exit 1
         ;;
 esac
+

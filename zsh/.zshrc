@@ -1,5 +1,22 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin
+# TODO: find a better way to do this
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export IS_MAC=1
+elif [[ -f /etc/arch-release ]]; then
+    export IS_ARCH=1
+elif [[ -f /etc/fedora-release ]]; then
+    export IS_FEDORA=1
+fi
+
+# Common paths for all systems
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
+if [[ -n "$IS_MAC" ]]; then
+    # Add Homebrew to path if it exists
+    [[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+if [[ -n "$IS_ARCH" || -n "$IS_FEDORA" ]]; then
+    export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
+fi
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -41,12 +58,11 @@ zstyle ':omz:update' frequency 7
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,8 +88,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-plugins=(... colored-man-pages)
-
 # ========== Shortcuts ========== 
 # ctrl backspace to delete previous word (ctrl+w does the same)
 bindkey '^H' backward-kill-word
@@ -95,6 +109,7 @@ alias dockps='docker ps --format "{{.ID}}  {{.Names}}"'
 docksh() { docker exec -it $1 /bin/bash; }
 
 # git
+# this is kinda useless, the git plugin for already has a alias for this: grt
 alias gitroot='cd $(git rev-parse --show-toplevel)'
 
 # zoxide
