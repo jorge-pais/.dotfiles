@@ -22,7 +22,12 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+if [[ -n "$IS_MAC" ]]; then
+    ZSH_THEME="robbyrussell"
+else
+    ZSH_THEME="agnoster"
+fi
+
 
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
